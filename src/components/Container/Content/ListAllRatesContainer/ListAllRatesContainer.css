@@ -1,0 +1,18 @@
+.list_container_size {
+    max-height: calc(100vh - 300px);
+    width: 100%;
+}
+
+.list::-webkit-scrollbar {
+    width: 0;
+}
+
+.list {
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+
+.bottom_grad {
+    background-image: linear-gradient(#ffffff82, #ffffffd9, #ffffff);
+}

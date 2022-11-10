@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { fetchData } from './ActionCreater'
-import { IValueInfo, IJsonRes } from '../../models/IJsonRes'
+import {
+    IValueInfo,
+    IJsonRes,
+    IListRates,
+    profitStatus,
+} from '../../models/IJsonRes'
 
 export interface optionsSelect {
     value: string
@@ -15,6 +20,7 @@ interface rageState {
         optionsSelect: optionsSelect[]
         charCode: string[]
         valuteInfo: IValueInfo[]
+        listAllRates: IListRates[]
         sendKey: string
         getKey: string
         sendValue: number
@@ -30,6 +36,7 @@ const initialState: rageState = {
         optionsSelect: [],
         charCode: [],
         valuteInfo: [],
+        listAllRates: [],
         sendKey: '',
         getKey: '',
         sendValue: 0,
@@ -106,6 +113,7 @@ export const rageSlice = createSlice({
             state.data.valuteInfo = []
             state.data.charCode = []
             state.data.optionsSelect = []
+            state.data.listAllRates = []
 
             state.data.charCode = Object.keys(action.payload.Valute)
 
@@ -115,6 +123,22 @@ export const rageSlice = createSlice({
 
             for (let i of state.data.charCode) {
                 state.data.valuteInfo.push(action.payload.Valute[i])
+            }
+
+            for (let i of state.data.valuteInfo) {
+                let profitStatus: profitStatus =
+                    i.Previous > i.Value
+                        ? 'down'
+                        : i.Previous < i.Value
+                        ? 'up'
+                        : 'none'
+                let profitVal: number =
+                    i.Previous > i.Value
+                        ? (i.Previous / i.Value - 1) * 100
+                        : i.Previous < i.Value
+                        ? (i.Value / i.Previous - 1) * 100
+                        : 0
+                state.data.listAllRates.push({ ...i, profitStatus, profitVal })
             }
 
             state.data.optionsSelect.push({ value: 'RUB', label: 'RUB' })

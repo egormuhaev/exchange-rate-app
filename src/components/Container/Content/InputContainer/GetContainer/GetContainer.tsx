@@ -26,7 +26,7 @@ const GetContainer = () => {
                     {getValue}
                 </span>
                 <Select
-                    className="w-[100px] text-[#3f3762] font-semibold"
+                    className="w-[100px] text-[#3f3762] font-semibold scroo"
                     options={optionsSelect}
                     value={getValueF()}
                     onChange={onChange}
