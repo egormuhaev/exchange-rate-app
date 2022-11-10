@@ -35,7 +35,7 @@ var json: object = {
 }
 
 var convert = (
-    SendValValute: number,
+    SendValValute: number ,
     SendCharCod_1: string,
     GetCharCod_2: string
 ): number => {
@@ -55,8 +55,10 @@ var convert = (
     }
 }
 
+
 var arrayCharCode: string[] = Object.keys(json['Valute']) // Возвращает имена объектов валют
 var arrayValuteInfo: object[] = [] // хранит объекты описывающие каждую валюту
+
 
 for (let i of arrayCharCode) {
     arrayValuteInfo.push(json['Valute'][i])
