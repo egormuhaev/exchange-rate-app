@@ -41,6 +41,11 @@ export const rageSlice = createSlice({
     name: 'rage',
     initialState,
     reducers: {
+        toSwap(state) {
+            let valContainer = state.data.getKey
+            state.data.getKey = state.data.sendKey
+            state.data.sendKey = valContainer
+        },
         setSendKey(state, action: PayloadAction<string>) {
             state.data.sendKey = action.payload
         },
