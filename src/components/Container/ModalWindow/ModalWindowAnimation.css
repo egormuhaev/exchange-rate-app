@@ -1,0 +1,32 @@
+.modal {
+}
+
+@keyframes show_modla {
+    0% {
+        opacity: 0;
+        transform: rotateY(-90);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(0);
+    }
+}
+
+.modal-enter {
+    animation: show_modla 0.7s forwards;
+}
+
+@keyframes unshow_modla {
+    0% {
+        opacity: 0;
+        transform: rotateY(-90);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(0);
+    }
+}

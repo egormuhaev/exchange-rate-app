@@ -4,7 +4,7 @@ import ListAllRatesContainer from './ListAllRatesContainer/LIstAllRatesContainer
 
 function Content() {
     return (
-        <div className="h-[100vh] w-[100%] bg-red-300 flex flex-col">
+        <div className="h-[100vh] w-[100%] flex flex-col">
             <InputContainer />
             <ListAllRatesContainer />
         </div>

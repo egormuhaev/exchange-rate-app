@@ -45,7 +45,7 @@ function ListItem({
                         {Previus}
                     </p>
                     <img
-                        className="h-[20px] w-[20px] mr-[1px]"
+                        className="h-[24px] w-[24px] mr-[1px]"
                         src={indicatorDown}
                         alt="down"
                     />

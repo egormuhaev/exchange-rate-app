@@ -14,7 +14,8 @@ export interface optionsSelect {
 
 interface rageState {
     isLoading: boolean
-    error: string
+    error: boolean
+    errorMessage: string
 
     data: {
         optionsSelect: optionsSelect[]
@@ -30,7 +31,8 @@ interface rageState {
 
 const initialState: rageState = {
     isLoading: false,
-    error: '',
+    error: false,
+    errorMessage: '',
 
     data: {
         optionsSelect: [],
@@ -48,6 +50,9 @@ export const rageSlice = createSlice({
     name: 'rage',
     initialState,
     reducers: {
+        setError(state, action: PayloadAction<boolean>) {
+            state.error = action.payload
+        },
         toSwap(state) {
             let valContainer = state.data.getKey
             state.data.getKey = state.data.sendKey
@@ -108,7 +113,8 @@ export const rageSlice = createSlice({
         ) => {
             // Success
             state.isLoading = false
-            state.error = ''
+            state.errorMessage = ''
+            state.error = false
 
             state.data.valuteInfo = []
             state.data.charCode = []
@@ -145,7 +151,8 @@ export const rageSlice = createSlice({
         },
         [fetchData.rejected.type]: (state, action: PayloadAction<string>) => {
             state.isLoading = false
-            state.error = action.payload
+            state.errorMessage = action.payload
+            state.error = true
         },
     },
 })
