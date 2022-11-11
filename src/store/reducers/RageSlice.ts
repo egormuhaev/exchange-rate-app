@@ -75,6 +75,17 @@ export const rageSlice = createSlice({
             ) {
                 state.data.getValue = state.data.sendValue
             } else if (
+                state.data.sendKey !== 'RUB' &&
+                state.data.getKey === 'RUB'
+            ) {
+                state.data.getValue = Number(
+                    (
+                        state.data.valuteInfo[
+                            state.data.charCode.indexOf(state.data.sendKey)
+                        ].Value * state.data.sendValue
+                    ).toFixed(2)
+                )
+            } else if (
                 state.data.sendKey === '' ||
                 state.data.getKey === '' ||
                 (state.data.sendKey === '' && state.data.getKey === '')
