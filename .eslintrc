@@ -1,0 +1,16 @@
+{
+    "extends": [
+        "react-app",
+        "react-app/jest"
+    ],
+    "rules": {
+        "no-console": "warn", // отсутствие вызова консоли в коде
+        "prefer-const": "error", // если переменная не меняется то предпочтительнее константа 
+        "quotes": ["warn", "single"], // двойные кавычки
+        "jsx-quotes": ["warn", "prefer-double"],
+        "indent": ["warn", 2], // отступ 
+        "max-len": ["warn", {"code": 220}],
+        "comma-dangle": ["warn", "always-multiline"], // запятые
+        "semi": ["error", "always"] // точки с запятой
+    }
+}

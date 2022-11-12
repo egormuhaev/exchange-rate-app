@@ -3,11 +3,8 @@
 
 @keyframes show_modla {
     0% {
-        opacity: 0;
-        transform: rotateY(-90);
-    }
-    50% {
         opacity: 1;
+        transform: rotateY(-90);
     }
     100% {
         transform: rotate(0);
@@ -18,15 +15,4 @@
     animation: show_modla 0.7s forwards;
 }
 
-@keyframes unshow_modla {
-    0% {
-        opacity: 0;
-        transform: rotateY(-90);
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        transform: rotate(0);
-    }
-}
+

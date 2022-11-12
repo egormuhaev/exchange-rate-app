@@ -1,23 +1,21 @@
-import { useEffect } from 'react'
-import './App.css'
-import Container from './components/Container/Container'
-import { useAppDispatch, useAppSelector } from './hook/redux'
-import { rageSlice } from './store/reducers/RageSlice'
-import { fetchData } from './store/reducers/ActionCreater'
+import { useEffect } from 'react';
+import './App.css';
+import Container from './components/Container/Container';
+import { useAppDispatch } from './hook/redux';
+import { fetchData } from './store/reducers/ActionCreater';
 
 function App() {
-    const dispatch = useAppDispatch()
-    const { isLoading, error } = useAppSelector((state) => state.rageReducer)
+  const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        dispatch(fetchData())
-    }, [])
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
 
-    return (
-        <div className="App">
-            <Container />
-        </div>
-    )
+  return (
+    <div className="App">
+      <Container />
+    </div>
+  );
 }
 
-export default App
+export default App;
