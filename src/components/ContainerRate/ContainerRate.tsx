@@ -3,7 +3,7 @@ import Sidebar from './Sidebar/Sidebar';
 import Content from './Content/Content';
 import ModalWindow from './ModalWindow/ModalWindow';
 
-function Container() {
+function ContainerRate() {
   return (
     <div className="h-[100vh] w-[100%] flex flex-row items-center justify-center z-30">
       {/* <Sidebar /> */}
@@ -13,4 +13,4 @@ function Container() {
   );
 }
 
-export default Container;
+export default ContainerRate;

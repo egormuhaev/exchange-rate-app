@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import './App.css';
-import Container from './components/Container/Container';
+import ContainerRate from './components/ContainerRate/ContainerRate';
 import { useAppDispatch } from './hook/redux';
 import { fetchData } from './store/reducers/ActionCreater';
 
@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div className="App">
-      <Container />
+      <ContainerRate />
     </div>
   );
 }
