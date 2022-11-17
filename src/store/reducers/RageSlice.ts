@@ -8,25 +8,25 @@ import {
 } from '../../models/IJsonRes';
 
 export interface optionsSelect {
-    value: string
-    label: string
+  value: string
+  label: string
 }
 
 interface rageState {
-    isLoading: boolean
-    error: boolean
-    errorMessage: string
+  isLoading: boolean
+  error: boolean
+  errorMessage: string
 
-    data: {
-        optionsSelect: optionsSelect[]
-        charCode: string[]
-        valuteInfo: IValueInfo[]
-        listAllRates: IListRates[]
-        sendKey: string
-        getKey: string
-        sendValue: number
-        getValue: number
-    }
+  data: {
+    optionsSelect: optionsSelect[]
+    charCode: string[]
+    valuteInfo: IValueInfo[]
+    listAllRates: IListRates[]
+    sendKey: string
+    getKey: string
+    sendValue: number
+    getValue: number
+  }
 }
 
 const initialState: rageState = {
@@ -50,6 +50,21 @@ export const rageSlice = createSlice({
   name: 'rage',
   initialState,
   reducers: {
+    sortAllListRate(state, action: PayloadAction<boolean>) {
+      if (action.payload) {
+        state.data.listAllRates.sort((val1, val2) => {
+          if (val1.Value > val2.Value) return 1;
+          else if (val1.Value < val2.Value) return -1;
+          else return 0;
+        });
+      } else {
+        state.data.listAllRates.sort((val1, val2) => {
+          if (val1.Value > val2.Value) return -1;
+          else if (val1.Value < val2.Value) return 1;
+          else return 0;
+        });
+      }
+    },
     setError(state, action: PayloadAction<boolean>) {
       state.error = action.payload;
     },
@@ -70,14 +85,11 @@ export const rageSlice = createSlice({
     setGetValue(state) {
       if (
         state.data.sendKey === state.data.getKey &&
-                state.data.sendKey !== '' &&
-                state.data.getKey !== ''
+        state.data.sendKey !== '' &&
+        state.data.getKey !== ''
       ) {
         state.data.getValue = state.data.sendValue;
-      } else if (
-        state.data.sendKey !== 'RUB' &&
-                state.data.getKey === 'RUB'
-      ) {
+      } else if (state.data.sendKey !== 'RUB' && state.data.getKey === 'RUB') {
         state.data.getValue = Number(
           (
             state.data.valuteInfo[
@@ -87,8 +99,8 @@ export const rageSlice = createSlice({
         );
       } else if (
         state.data.sendKey === '' ||
-                state.data.getKey === '' ||
-                (state.data.sendKey === '' && state.data.getKey === '')
+        state.data.getKey === '' ||
+        (state.data.sendKey === '' && state.data.getKey === '')
       ) {
         state.data.getValue = 0;
       } else if (state.data.sendKey === 'RUB') {
@@ -103,12 +115,12 @@ export const rageSlice = createSlice({
         state.data.getValue = Number(
           (
             (state.data.sendValue *
-                            state.data.valuteInfo[
-                              state.data.charCode.indexOf(state.data.sendKey)
-                            ].Value) /
-                        state.data.valuteInfo[
-                          state.data.charCode.indexOf(state.data.getKey)
-                        ].Value
+              state.data.valuteInfo[
+                state.data.charCode.indexOf(state.data.sendKey)
+              ].Value) /
+            state.data.valuteInfo[
+              state.data.charCode.indexOf(state.data.getKey)
+            ].Value
           ).toFixed(2),
         );
       }
@@ -118,10 +130,7 @@ export const rageSlice = createSlice({
     [fetchData.pending.type]: (state) => {
       state.isLoading = true;
     },
-    [fetchData.fulfilled.type]: (
-      state,
-      action: PayloadAction<IJsonRes>,
-    ) => {
+    [fetchData.fulfilled.type]: (state, action: PayloadAction<IJsonRes>) => {
       // Success
       state.isLoading = false;
       state.errorMessage = '';
@@ -144,17 +153,13 @@ export const rageSlice = createSlice({
 
       for (const i of state.data.valuteInfo) {
         const profitStatus: profitStatus =
-                    i.Previous > i.Value
-                      ? 'down'
-                      : i.Previous < i.Value
-                        ? 'up'
-                        : 'none';
+          i.Previous > i.Value ? 'down' : i.Previous < i.Value ? 'up' : 'none';
         const profitVal: number =
-                    i.Previous > i.Value
-                      ? (i.Previous / i.Value - 1) * 100
-                      : i.Previous < i.Value
-                        ? (i.Value / i.Previous - 1) * 100
-                        : 0;
+          i.Previous > i.Value
+            ? (i.Previous / i.Value - 1) * 100
+            : i.Previous < i.Value
+              ? (i.Value / i.Previous - 1) * 100
+              : 0;
         state.data.listAllRates.push({ ...i, profitStatus, profitVal });
       }
 
